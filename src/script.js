@@ -213,7 +213,12 @@ scene.add(moonLight)
 /**
  * GHOSTS 
  */
-
+const ghost1 = new THREE.PointLight('#ff00ff', 6, 3);
+scene.add(ghost1)
+const ghost2 = new THREE.PointLight('#e1ba41', 6, 3);
+scene.add(ghost2)
+const ghost3 = new THREE.PointLight('#ff0000', 6, 3);
+scene.add(ghost3)
 
 
 /**
@@ -271,6 +276,22 @@ const clock = new THREE.Clock()
 const tick = () =>
 {
     const elapsedTime = clock.getElapsedTime()
+
+    // GHOAST animations
+    const ghoast1R = elapsedTime * 0.5;
+    ghost1.position.x = Math.cos(ghoast1R) * 5;
+    ghost1.position.z = Math.sin(ghoast1R) * 5;
+    ghost1.position.y = Math.sin(ghoast1R);
+
+    const ghoast2R = -elapsedTime * 1.5;
+    ghost2.position.x = Math.cos(ghoast2R) * 7;
+    ghost2.position.z = Math.sin(ghoast2R) * 5;
+    ghost2.position.y = Math.sin(ghoast2R * 3) * (Math.sin(ghoast2R));
+
+    const ghoast3R = -elapsedTime * 0.18;
+    ghost3.position.x = Math.cos(ghoast3R) * (7 + Math.sin(ghoast3R) * 3);
+    ghost3.position.z = Math.sin(ghoast3R) * (10 + Math.sin(ghoast3R) * 7);
+    ghost3.position.y = Math.sin(ghoast3R);
 
     // Update controls
     controls.update()
