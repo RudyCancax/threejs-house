@@ -114,6 +114,11 @@ bush4.position.set(-1, 0.2, 2.5);
 bush4.scale.set(0.4, 0.4, 0.4);
 house.add(bush1, bush2, bush3, bush4);
 
+bush1.castShadow = true;
+bush2.castShadow = true;
+bush3.castShadow = true;
+bush4.castShadow = true;
+
 /**
  * GRAVES
  */
@@ -135,6 +140,7 @@ for(let i = 0; i< 30; i++){
     grave.rotation.y = Math.random();
     grave.rotation.z = Math.random() - 0.2;
     grave.position.set(x, 0.5, z)
+    grave.castShadow = true;
     graves.add(grave)
 }
 
@@ -143,6 +149,10 @@ for(let i = 0; i< 30; i++){
  */
 const pointLight = new THREE.PointLight('#ffe628', 3);
 pointLight.position.set(0, 2.2, 2.7);
+pointLight.castShadow = true;
+pointLight.shadow.mapSize.width = 256;
+pointLight.shadow.mapSize.height = 256;
+pointLight.shadow.camera.far = 10;
 scene.add(pointLight);
 
 
@@ -191,6 +201,9 @@ const floor = new THREE.Mesh(
 floor.rotation.x = - Math.PI * 0.5
 floor.position.y = 0
 scene.add(floor)
+
+floor.receiveShadow = true;
+
 
 /**
  * Lights
@@ -267,6 +280,7 @@ const renderer = new THREE.WebGLRenderer({
 renderer.setSize(sizes.width, sizes.height)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 renderer.setClearColor('#46474b');
+renderer.shadowMap.enabled = true;
 
 /**
  * Animate
